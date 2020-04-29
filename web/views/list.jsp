@@ -1,29 +1,44 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="app.entities.Users" %><%--
-  Created by IntelliJ IDEA.
-  User: book
-  Date: 29.04.2020
-  Time: 17:32
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="app.entities.User" %>
+<%@ page import="java.util.HashSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>List of users</title>
+    <title>Users list</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<body>
-<h1>List of users</h1>
-<ul>
-<%
-    ArrayList<Users> usersList = (ArrayList<Users>) request.getAttribute("usersList");
-    if (usersList.isEmpty()) {
-        out.println("<h2> Users list is empty now</h2>");
-    } else {
-        for (Users u : usersList) {
-            out.println("<li>" + u.getName() + "</li>");
-        }
-    }
-%>
-</ul>
+
+<body class="w3-light-grey">
+<div class="w3-container w3-blue-grey w3-opacity w3-right-align">
+    <h1>Super app!</h1>
+</div>
+
+<div class="w3-container w3-center w3-margin-bottom w3-padding">
+    <div class="w3-card-4">
+        <div class="w3-container w3-light-blue">
+            <h2>Users</h2>
+        </div>
+        <%
+            HashSet<User> names = (HashSet<User>) request.getAttribute("usersList");
+            out.println(names);
+            if (names != null && !names.isEmpty()) {
+                out.println("<ul class=\"w3-ul\">");
+                for (User u : names) {
+                    out.println("<li class=\"w3-hover-sand\">" + u.getName() + "</li>");
+                }
+                out.println("</ul>");
+
+            } else out.println("<div class=\"w3-panel w3-red w3-display-container w3-card-4 w3-round\">\n"
+                    +
+                    "   <span onclick=\"this.parentElement.style.display='none'\"\n" +
+                    "   class=\"w3-button w3-margin-right w3-display-right w3-round-large w3-hover-red w3-border w3-border-red w3-hover-border-grey\">×</span>\n" +
+                    "   <h5>There are no users yet!</h5>\n" +
+                    "</div>");
+        %>
+    </div>
+</div>
+
+<div class="w3-container w3-grey w3-opacity w3-right-align w3-padding">
+    <button class="w3-btn w3-round-large" onclick="location.href='/'">Back to main</button>
+</div>
 </body>
 </html>

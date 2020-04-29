@@ -1,15 +1,15 @@
 package app.model;
 
-import app.entities.Users;
+import app.entities.User;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Model {
     private static Model instance;
-    private final ArrayList<Users> model;
+    private final HashSet<User> model;
 
     private Model() {
-        this.model = new ArrayList<>();
+        this.model = new HashSet<>();
     }
 
     public static Model getInstance() {
@@ -19,11 +19,11 @@ public class Model {
         return instance;
     }
 
-    public ArrayList<Users> getListOfUsers() {
+    public HashSet<User> getListOfUsers() {
         return model;
     }
 
-    public Boolean addUser(Users user) {
+    public Boolean addUser(User user) {
         return model.add(user);
     }
 }
